@@ -1,0 +1,42 @@
+version: '3.8'
+services:
+  nodejs:
+    build:
+      context: ./Docker/Docker-Nodejs
+      dockerfile: Dockerfile
+    container_name: docker_nodejs
+    restart: unless-stopped
+    volumes:
+      - ./Docker/Docker-Nodejs:/usr/src/app
+    ports:
+      - "3000:3000"
+
+  python_flask:
+    build:
+      context: ./Docker/Docker-Python-Flask-App
+      dockerfile: Dockerfile
+    container_name: docker_flask
+    restart: unless-stopped
+    ports:
+      - "5000:5000"
+
+  python_app:
+    build:
+      context: ./Docker/Docker-Python-App
+      dockerfile: Dockerfile
+    container_name: docker_python
+    restart: unless-stopped
+
+  java_app:
+    build:
+      context: ./Docker/Docker-Java-App
+      dockerfile: Dockerfile
+    container_name: docker_java
+    restart: "no"
+
+  dotnet_app:
+    build:
+      context: ./Docker/Docker-Dotnet-App/DotnetApp
+      dockerfile: Dockerfile
+    container_name: docker_dotnet
+    restart: unless-stopped
